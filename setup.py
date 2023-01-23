@@ -13,9 +13,7 @@ setup(
         description='Wrapper for Panduza MQTT Calls',
         readme = "README.md",
         packages=find_packages(where='src'),
+        package_dir = {"": "src"},
         cmdclass={'install': CustomInstallCommand},
-
-        python_requires = ">=3.6",
-
         install_requires=['aardvark_py'],
 )
