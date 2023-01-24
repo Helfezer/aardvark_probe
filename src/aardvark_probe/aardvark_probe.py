@@ -37,10 +37,8 @@ class probe:
         self.aa_handler = None
         self.port = None
 
-        self.__aa_spi = self.aardvark_spi(self)
-        self.__aa_gpio = self.aardvark_pin(self)
-
-        self.spi = self.spi_api(self.__aa_spi)
+        self.aa_spi = self.__aardvark_spi(self)
+        self.aa_gpio = self.__aardvark_pin(self)
 
         self.log = logging.getLogger(f"aardvark probe {self.SerialId}" )
 
@@ -63,8 +61,8 @@ class probe:
         self.open()
         self.PinConfiguration(pinConfig[config["Probe"]["EnablePin"]])
 
-        self.__aa_spi.Configure(config["SPI"])
-        self.__aa_gpio.Configure(config)
+        self.aa_spi.Configure(config["SPI"])
+        self.aa_gpio.Configure(config)
 
 # -----------------------------------------------------------------------------
 
@@ -121,7 +119,7 @@ class probe:
 
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
-    class aardvark_spi:
+    class __aardvark_spi:
         def __init__(self, object):
             self.probe = object
 
@@ -203,7 +201,7 @@ class probe:
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 
-    class aardvark_pin:
+    class __aardvark_pin:
         def __init__(self, object):
             self.probe = object
             self.Direction = dict()
