@@ -237,6 +237,20 @@ class probe:
             else:
                 TranslateGpioMask(self.PinStatus, PinBitmask)
 
+
+    # -----------------------------------------------------------------------------
+
+        def GpioChange(self, pin: GpioBits, timeout):
+            PinBitmask = aa_gpio_change(self.probe.aa_handler, timeout)
+            if PinBitmask < 0:
+                self.log.debug(f"fail getting pin status, ({aa_status_string(PinBitmask)})")
+                raise
+            else:
+                TranslateGpioMask(self.PinStatus, PinBitmask)
+
+            return self.PinStatus[pin]
+
+
     # -----------------------------------------------------------------------------
 
         def GetPin(self, pin: GpioBits):
